@@ -1,0 +1,12 @@
+{
+  "name": "mdl-wrapped-generator",
+  "version": "1.0.0",
+  "description": "Gerador pessoal do MyDramaList Wrapped -- roda local, sem site nem extensão",
+  "main": "generate-wrapped.js",
+  "scripts": {
+    "generate": "node generate-wrapped.js"
+  },
+  "dependencies": {
+    "puppeteer": "^23.0.0"
+  }
+}

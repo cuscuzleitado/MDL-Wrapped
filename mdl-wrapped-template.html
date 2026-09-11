@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyDramaList Wrapped 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --bg-deep: #0b0714;
+    --bg-panel: #17102b;
+    --bg-panel-2: #1d1436;
+    --accent-1: #a855f7;
+    --accent-2: #e879f9;
+    --text-main: #f3eefc;
+    --text-dim: #b8a9d9;
+    --border: rgba(168, 85, 247, 0.28);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: radial-gradient(circle at 20% 0%, #241238 0%, var(--bg-deep) 55%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 16px 60px;
+    font-family: "Inter", sans-serif;
+  }
+
+  .toolbar {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .toolbar-label {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .swatches { display: flex; gap: 8px; }
+
+  .swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .swatch.active { border-color: #fff; }
+
+  .card {
+    width: 100%;
+    max-width: 900px;
+    background: linear-gradient(165deg, var(--bg-panel) 0%, var(--bg-deep) 100%);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 36px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  .hero-identity {
+    text-align: center;
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .username {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--accent-2);
+    margin: 0 0 2px;
+    letter-spacing: 0.02em;
+  }
+
+  .eyebrow {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--text-main);
+    text-transform: uppercase;
+    margin: 0 0 6px;
+  }
+
+  .year {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-size: 76px;
+    line-height: 1;
+    margin: 0;
+    color: var(--accent-2);
+    text-shadow: 0 0 30px var(--accent-1), 0 0 60px var(--accent-1);
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .stat-pill {
+    background: var(--bg-panel-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 140px;
+  }
+
+  .stat-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .stat-num {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--text-main);
+    display: block;
+  }
+
+  .stat-unit {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 700;
+  }
+
+  .panel {
+    background: var(--bg-panel-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 18px;
+  }
+
+  .panel-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    color: var(--text-main);
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .panel-title i { color: var(--accent-2); }
+
+  .highlights-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+
+  .highlight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    min-height: 110px;
+  }
+
+  .highlight-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .highlight-value {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--text-main);
+    margin: 0;
+  }
+
+  .highlight-sub {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .films-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+
+  .film-card { text-align: center; }
+
+  .film-card img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    border: 1px solid var(--border);
+  }
+
+  .film-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 8px 0 2px;
+    line-height: 1.25;
+  }
+
+  .film-score {
+    font-size: 11px;
+    color: var(--accent-2);
+    font-weight: 800;
+  }
+
+  .people-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .person-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .person-photo-wrap { position: relative; flex-shrink: 0; }
+
+  /* No forced crop here on purpose: MDL's own person thumbnail is already a good
+     headshot crop. Forcing it into an exact square via the proxy mangled faces,
+     so we only proxy for CORS and let the natural aspect ratio show through. */
+  .person-photo {
+    width: 84px;
+    height: auto;
+    border-radius: 14px;
+    display: block;
+    border: 2px solid var(--accent-1);
+  }
+
+  .person-rank {
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-panel-2);
+  }
+
+  .person-name {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-main);
+    margin: 0;
+  }
+
+  .person-count {
+    font-size: 12px;
+    color: var(--accent-2);
+    font-weight: 700;
+    margin: 2px 0 0;
+  }
+
+  .download-btn {
+    margin-top: 24px;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    border: none;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 640px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .films-row { grid-template-columns: repeat(3, 1fr); }
+    .people-row { grid-template-columns: 1fr; }
+    .highlights-row { grid-template-columns: 1fr; }
+    .year { font-size: 54px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span class="toolbar-label">Accent color</span>
+  <div class="swatches" id="swatches"></div>
+</div>
+
+<div id="card" class="card">
+  <header class="hero">
+    <div class="hero-identity">
+      <p class="username" id="usernameLabel"></p>
+      <p class="eyebrow">MyDramaList Wrapped</p>
+      <h1 class="year" id="yearLabel">2025</h1>
+    </div>
+    <div class="hero-stats" id="heroStats"></div>
+  </header>
+
+  <div class="highlights-row">
+    <section class="panel highlight">
+      <p class="highlight-label"><i class="fa-solid fa-clock"></i>Drama Time</p>
+      <p class="highlight-value" id="dramaTimeValue"></p>
+      <p class="highlight-sub" id="dramaTimeSub"></p>
+    </section>
+    <section class="panel highlight">
+      <p class="highlight-label"><i class="fa-solid fa-film"></i>Movie Time</p>
+      <p class="highlight-value" id="movieTimeValue"></p>
+    </section>
+    <section class="panel highlight">
+      <p class="highlight-label"><i class="fa-solid fa-fire"></i>Longest Streak</p>
+      <p class="highlight-value" id="streakValue"></p>
+    </section>
+  </div>
+
+  <div class="highlights-row">
+    <section class="panel highlight">
+      <p class="highlight-label"><i class="fa-solid fa-calendar-days"></i>Most Watched Month</p>
+      <p class="highlight-value" id="monthValue"></p>
+    </section>
+    <section class="panel highlight">
+      <p class="highlight-label"><i id="genreIcon" class="fa-solid fa-film"></i>Most Watched Genre</p>
+      <p class="highlight-value" id="genreValue"></p>
+    </section>
+    <section class="panel highlight">
+      <p class="highlight-label"><i class="fa-solid fa-earth-asia"></i>Top Country</p>
+      <p class="highlight-value" id="countryValue"></p>
+      <p class="highlight-sub" id="countrySub"></p>
+    </section>
+  </div>
+
+  <section class="panel">
+    <h2 class="panel-title">Top Rated Dramas</h2>
+    <div class="films-row" id="filmsRow"></div>
+  </section>
+
+  <section class="panel" id="moviesPanel" style="display:none;">
+    <h2 class="panel-title">Top Rated Movies</h2>
+    <div class="films-row" id="moviesRow"></div>
+  </section>
+
+  <section class="panel">
+    <h2 class="panel-title"><i class="fa-solid fa-crown"></i>Top 3 Most Watched Actresses</h2>
+    <div class="people-row" id="actressesRow"></div>
+  </section>
+
+  <section class="panel">
+    <h2 class="panel-title"><i class="fa-solid fa-crown"></i>Top 3 Most Watched Actors</h2>
+    <div class="people-row" id="actorsRow"></div>
+  </section>
+</div>
+
+<button class="download-btn" id="downloadBtn">Download Image</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  // Real data extracted from the MDL year-in-review page.
+  // This is only the default/preview data -- when generated via the
+  // automation script, window.renderWrapped(realData) overwrites it.
+  let data = {
+    "username": "cuscuzcomleite",
+    "year": "2025",
+    "stats": {"Dramas Completed":"90","Movies Completed":"1","Ratings":"51","Reviews":"0","Comments":"72","Votes":"22"},
+    "dramaTime": [
+      {"value":"4,190","unit":"Total Episodes"},
+      {"value":"735","unit":"Total Hours"}
+    ],
+    "movieTime": [
+      {"value":"1","unit":"Total Movies"},
+      {"value":"2","unit":"Total Hours"}
+    ],
+    "topGenres": [{"label":"Romance","count":88},{"label":"Drama","count":40},{"label":"Fantasy","count":22},{"label":"Comedy","count":19}],
+    "topCountry": {"label":"China","count":80},
+    "mostActiveMonth": "Jan",
+    "topGenre": "Romance",
+    "longestStreak": 22,
+    "topRatedDramas": [
+      {"title":"Study Group","score":"8.8","poster":"https://i.mydramalist.com/ABRNyg_4c.jpg"},
+      {"title":"Guardian: The Lonely and Great God","score":"8.8","poster":"https://i.mydramalist.com/JkD8Xc.jpg"},
+      {"title":"Undercover High School","score":"8.5","poster":"https://i.mydramalist.com/yWODkN_4c.jpg"},
+      {"title":"Love's Ambition","score":"8.3","poster":"https://i.mydramalist.com/3oAZ5V_4c.jpg"},
+      {"title":"Our Movie","score":"8.3","poster":"https://i.mydramalist.com/3oXPrj_4c.jpg"},
+      {"title":"The Fallen Lady Returns","score":"7.5","poster":"https://i.mydramalist.com/oQ6Lnk_4c.jpg"}
+    ],
+    "topRatedMovies": [
+      {"title":"Hear Me: Our Summer","score":"8.4","poster":"https://i.mydramalist.com/l0Q0je_4c.jpg"}
+    ],
+    "topActresses": [
+      {"name":"Zuo Yi","count":"5 Dramas","photo":"https://i.mydramalist.com/l0rDgN_5m.jpg"},
+      {"name":"Meng Na","count":"4 Dramas","photo":"https://i.mydramalist.com/eYEAAq_5m.jpg"},
+      {"name":"Peng Yao","count":"3 Dramas","photo":"https://i.mydramalist.com/JBDxeo_5m.jpg"}
+    ],
+    "topActors": [
+      {"name":"Wang Yi Ran","count":"3 Dramas","photo":"https://i.mydramalist.com/73RWwR_5m.jpg"},
+      {"name":"Miles Wei","count":"3 Dramas","photo":"https://i.mydramalist.com/zBDywy_5m.jpg"},
+      {"name":"Dai Gao Zheng","count":"3 Dramas","photo":"https://i.mydramalist.com/JB8P7o_5m.jpg"}
+    ]
+  };
+
+  const monthNamesFull = {Jan:"January",Feb:"February",Mar:"March",Apr:"April",May:"May",Jun:"June",Jul:"July",Aug:"August",Sep:"September",Oct:"October",Nov:"November",Dec:"December"};
+
+  const genreIcons = {
+    romance: "fa-heart", action: "fa-bolt", comedy: "fa-face-laugh-beam",
+    drama: "fa-masks-theater", fantasy: "fa-hat-wizard", thriller: "fa-triangle-exclamation",
+    mystery: "fa-magnifying-glass", horror: "fa-ghost", historical: "fa-landmark",
+    crime: "fa-magnifying-glass", family: "fa-people-roof", friendship: "fa-people-group",
+    youth: "fa-user-graduate", business: "fa-briefcase", life: "fa-leaf",
+    melodrama: "fa-heart-crack", psychological: "fa-brain", sports: "fa-medal",
+    music: "fa-music", war: "fa-shield-halved", political: "fa-landmark-flag",
+    default: "fa-film"
+  };
+  function getGenreIcon(label) {
+    return genreIcons[(label || "").toLowerCase()] || genreIcons.default;
+  }
+
+  const statIcons = {
+    "Dramas Completed": "fa-clapperboard",
+    "Movies Completed": "fa-film",
+    "Ratings": "fa-star",
+    "Reviews": "fa-message",
+    "Comments": "fa-comments",
+    "Votes": "fa-thumbs-up"
+  };
+
+  function findTime(arr, unit) {
+    const item = (arr || []).find((t) => t.unit === unit);
+    return item ? item.value : "--";
+  }
+
+  // Poster crop works well (MDL posters are already ~2:3), so we keep the forced
+  // crop for films. Person photos get proxied WITHOUT a forced crop (see CSS note).
+  function proxyPoster(url, w, h) {
+    if (!url) return url;
+    const clean = url.replace(/^https?:\/\//, "");
+    return `https://images.weserv.nl/?url=${encodeURIComponent(clean)}&w=${w}&h=${h}&fit=cover&a=top`;
+  }
+  function proxyPlain(url) {
+    if (!url) return url;
+    const clean = url.replace(/^https?:\/\//, "");
+    return `https://images.weserv.nl/?url=${encodeURIComponent(clean)}`;
+  }
+
+  function renderIdentity() {
+    document.getElementById("usernameLabel").textContent = "@" + data.username;
+    document.getElementById("yearLabel").textContent = data.year || "2025";
+  }
+
+  function renderHeroStats() {
+    const el = document.getElementById("heroStats");
+    el.innerHTML = Object.entries(data.stats).map(([unit, num]) => `
+      <div class="stat-pill">
+        <div class="stat-icon"><i class="fa-solid ${statIcons[unit] || "fa-star"}"></i></div>
+        <div>
+          <span class="stat-num">${num}</span>
+          <span class="stat-unit">${unit}</span>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function renderTopRow() {
+    document.getElementById("dramaTimeValue").textContent = findTime(data.dramaTime, "Total Episodes") + " Episodes";
+    document.getElementById("dramaTimeSub").textContent = findTime(data.dramaTime, "Total Hours") + " Hours";
+    document.getElementById("movieTimeValue").textContent = findTime(data.movieTime, "Total Hours") + " Hours";
+    document.getElementById("streakValue").textContent = data.longestStreak + "-Day Streak";
+  }
+
+  function renderHighlights() {
+    document.getElementById("monthValue").textContent = monthNamesFull[data.mostActiveMonth] || data.mostActiveMonth;
+    document.getElementById("genreValue").textContent = data.topGenre;
+    document.getElementById("genreIcon").className = "fa-solid " + getGenreIcon(data.topGenre);
+    document.getElementById("countryValue").textContent = data.topCountry.label;
+    document.getElementById("countrySub").textContent = `${data.topCountry.count} shows watched`;
+  }
+
+  function renderFilms(containerId, films) {
+    const el = document.getElementById(containerId);
+    el.innerHTML = films.slice(0, 6).map((f) => `
+      <div class="film-card">
+        <img crossorigin="anonymous" src="${proxyPoster(f.poster, 320, 480)}" alt="${f.title}">
+        <p class="film-title">${f.title}</p>
+        <p class="film-score">&#9733; ${f.score}</p>
+      </div>
+    `).join("");
+  }
+
+  function renderMoviesIfEligible() {
+    // Only show the Top Rated Movies panel when there's enough to fill a full
+    // row (6, matching Top Rated Dramas) -- a half-empty row under a full one
+    // looks broken rather than intentional.
+    if (data.topRatedMovies && data.topRatedMovies.length >= 6) {
+      document.getElementById("moviesPanel").style.display = "";
+      renderFilms("moviesRow", data.topRatedMovies);
+    }
+  }
+
+  function renderPeople(containerId, people) {
+    const el = document.getElementById(containerId);
+    el.innerHTML = people.slice(0, 3).map((p, i) => `
+      <div class="person-card">
+        <div class="person-photo-wrap">
+          <img class="person-photo" crossorigin="anonymous" src="${proxyPlain(p.photo)}" alt="${p.name}">
+          <div class="person-rank">${i + 1}</div>
+        </div>
+        <div>
+          <p class="person-name">${p.name}</p>
+          <p class="person-count">${p.count}</p>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  const themes = [
+    { name: "Purple", c1: "#a855f7", c2: "#e879f9" },
+    { name: "Blue", c1: "#3b82f6", c2: "#22d3ee" },
+    { name: "Rose", c1: "#f43f5e", c2: "#fb7185" },
+    { name: "Green", c1: "#22c55e", c2: "#4ade80" },
+    { name: "Gold", c1: "#f59e0b", c2: "#fbbf24" }
+  ];
+
+  function applyTheme(c1, c2) {
+    document.documentElement.style.setProperty("--accent-1", c1);
+    document.documentElement.style.setProperty("--accent-2", c2);
+  }
+
+  function renderSwatches() {
+    const el = document.getElementById("swatches");
+    el.innerHTML = themes.map((t, i) => `
+      <button class="swatch ${i === 0 ? "active" : ""}" title="${t.name}"
+        style="background: linear-gradient(135deg, ${t.c1}, ${t.c2})"
+        data-c1="${t.c1}" data-c2="${t.c2}"></button>
+    `).join("");
+    el.querySelectorAll(".swatch").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        el.querySelectorAll(".swatch").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        applyTheme(btn.dataset.c1, btn.dataset.c2);
+      });
+    });
+  }
+
+  function renderAll() {
+    renderIdentity();
+    renderHeroStats();
+    renderTopRow();
+    renderHighlights();
+    renderFilms("filmsRow", data.topRatedDramas);
+    renderMoviesIfEligible();
+    renderPeople("actressesRow", data.topActresses);
+    renderPeople("actorsRow", data.topActors);
+  }
+
+  // Called by the local automation script (generate-wrapped.js) after it
+  // scrapes a real profile, so this same template can render anyone's data.
+  window.renderWrapped = function (newData) {
+    data = newData;
+    renderAll();
+  };
+
+  renderAll();
+  renderSwatches();
+
+  document.getElementById("downloadBtn").addEventListener("click", () => {
+    html2canvas(document.getElementById("card"), { backgroundColor: "#0b0714", scale: 2, useCORS: true }).then((canvas) => {
+      const link = document.createElement("a");
+      link.download = "mydramalist-wrapped-2025.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    });
+  });
+</script>
+</body>
+</html>
